@@ -1,0 +1,42 @@
+name: Optimize web assets
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install image tools
+        run: sudo apt-get update && sudo apt-get install -y webp
+
+      - name: Create optimized images
+        run: |
+          mkdir -p optimized
+          cwebp -q 82 -resize 2400 0 "Ext 2.jpg" -o optimized/ext-2.webp
+          cwebp -q 80 -resize 2200 0 "01.jpg" -o optimized/01.webp
+          cwebp -q 80 -resize 2200 0 "02.jpg" -o optimized/02.webp
+          cwebp -q 80 -resize 2200 0 "03.jpg" -o optimized/03.webp
+          cwebp -q 80 -resize 2200 0 "04.jpg" -o optimized/04.webp
+          cwebp -q 80 -resize 2200 0 "04B.jpg" -o optimized/04b.webp
+          cwebp -q 80 -resize 2200 0 "05.jpg" -o optimized/05.webp
+          cwebp -q 82 -resize 2200 0 "Ext 1.jpg" -o optimized/ext-1.webp
+          cwebp -q 82 -resize 2400 0 "Planta.jpg" -o optimized/planta.webp
+
+      - name: Compress video for web
+        run: |
+          mkdir -p optimized
+          ffmpeg -y -i "2604VC_Video_compressed.mp4" -vf "scale='min(1920,iw)':-2" -c:v libx264 -preset slow -crf 28 -movflags +faststart -c:a aac -b:a 96k optimized/proyecto.mp4
+
+      - name: Commit optimized assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add optimized
+          git diff --cached --quiet || git commit -m "Optimize images and video for web"
+          git push
