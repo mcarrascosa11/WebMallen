@@ -17,15 +17,10 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: 22
+          cache: npm
 
       - name: Install image optimizer
         run: npm install --no-save sharp
-
-      - name: Install FFmpeg
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg
-          ffmpeg -version
 
       - name: Create optimized images
         run: |
@@ -45,25 +40,26 @@ jobs:
           ];
           (async () => {
             for (const [input, output, width, quality] of images) {
-              await sharp(input).resize({ width, withoutEnlargement: true }).webp({ quality }).toFile(output);
+              await sharp(input)
+                .resize({ width, withoutEnlargement: true })
+                .webp({ quality })
+                .toFile(output);
               console.log(`Created ${output}`);
             }
-          })().catch(err => { console.error(err); process.exit(1); });
+          })().catch(err => {
+            console.error(err);
+            process.exit(1);
+          });
           NODE
 
-      - name: Compress video for web
-        run: |
-          ffmpeg -y -i "2604VC_Video_compressed.mp4" \
-            -vf "scale='min(1920,iw)':-2" \
-            -c:v libx264 -preset medium -crf 28 \
-            -movflags +faststart -an optimized/proyecto.mp4
-
-      - name: Commit optimized assets
+      - name: Commit optimized images
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add optimized
           if ! git diff --cached --quiet; then
-            git commit -m "Optimize images and video for web"
+            git commit -m "Optimize images for web"
             git push
+          else
+            echo "No optimized image changes to commit"
           fi
