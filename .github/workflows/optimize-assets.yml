@@ -10,31 +10,53 @@ jobs:
   optimize:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - name: Checkout
+        uses: actions/checkout@v5
 
-      - name: Install optimization tools
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Install image optimizer
+        run: npm install --no-save sharp
+
+      - name: Install FFmpeg
         run: |
           sudo apt-get update
-          sudo apt-get install -y webp ffmpeg
-          cwebp -version
+          sudo apt-get install -y ffmpeg
           ffmpeg -version
 
       - name: Create optimized images
         run: |
           mkdir -p optimized
-          cwebp -q 82 -resize 2400 0 "Ext 2.jpg" -o optimized/ext-2.webp
-          cwebp -q 80 -resize 2200 0 "01.jpg" -o optimized/01.webp
-          cwebp -q 80 -resize 2200 0 "02.jpg" -o optimized/02.webp
-          cwebp -q 80 -resize 2200 0 "03.jpg" -o optimized/03.webp
-          cwebp -q 80 -resize 2200 0 "04.jpg" -o optimized/04.webp
-          cwebp -q 80 -resize 2200 0 "04B.jpg" -o optimized/04b.webp
-          cwebp -q 80 -resize 2200 0 "05.jpg" -o optimized/05.webp
-          cwebp -q 82 -resize 2200 0 "Ext 1.jpg" -o optimized/ext-1.webp
-          cwebp -q 82 -resize 2400 0 "Planta.jpg" -o optimized/planta.webp
+          node <<'NODE'
+          const sharp = require('sharp');
+          const images = [
+            ['Ext 2.jpg', 'optimized/ext-2.webp', 2400, 82],
+            ['01.jpg', 'optimized/01.webp', 2200, 80],
+            ['02.jpg', 'optimized/02.webp', 2200, 80],
+            ['03.jpg', 'optimized/03.webp', 2200, 80],
+            ['04.jpg', 'optimized/04.webp', 2200, 80],
+            ['04B.jpg', 'optimized/04b.webp', 2200, 80],
+            ['05.jpg', 'optimized/05.webp', 2200, 80],
+            ['Ext 1.jpg', 'optimized/ext-1.webp', 2200, 82],
+            ['Planta.jpg', 'optimized/planta.webp', 2400, 82],
+          ];
+          (async () => {
+            for (const [input, output, width, quality] of images) {
+              await sharp(input).resize({ width, withoutEnlargement: true }).webp({ quality }).toFile(output);
+              console.log(`Created ${output}`);
+            }
+          })().catch(err => { console.error(err); process.exit(1); });
+          NODE
 
       - name: Compress video for web
         run: |
-          ffmpeg -y -i "2604VC_Video_compressed.mp4" -vf "scale='min(1920,iw)':-2" -c:v libx264 -preset slow -crf 28 -movflags +faststart -c:a aac -b:a 96k optimized/proyecto.mp4
+          ffmpeg -y -i "2604VC_Video_compressed.mp4" \
+            -vf "scale='min(1920,iw)':-2" \
+            -c:v libx264 -preset medium -crf 28 \
+            -movflags +faststart -an optimized/proyecto.mp4
 
       - name: Commit optimized assets
         run: |
