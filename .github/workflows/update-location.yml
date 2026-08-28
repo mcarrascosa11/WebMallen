@@ -13,22 +13,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Update coordinates
+      - name: Update site
         run: |
           python - <<'PY'
           from pathlib import Path
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
-          old = '41.895129;-1.425063'
-          new = '41.903027;-1.422822'
-          s = s.replace(old, new)
+          s = s.replace('41.895129;-1.425063', '41.903027;-1.422822')
           s = s.replace('41.895129,-1.425063', '41.903027,-1.422822')
+          s = s.replace('/Bardenas.jpg', '/57414076_2825488057492544_5081431775616434176_n.jpg')
+          s = s.replace('<p class="environment-credit">Fotografía: Diego Delso · CC BY-SA 4.0 · Wikimedia Commons</p>', '')
           p.write_text(s, encoding='utf-8')
           PY
       - name: Commit change
         run: |
           git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.email '41898282+users.noreply.github.com'
           git add index.html
-          git diff --cached --quiet || git commit -m 'Actualizar ubicación de la promoción'
+          git diff --cached --quiet || git commit -m 'Cambiar fotografía de las Bardenas'
           git push
