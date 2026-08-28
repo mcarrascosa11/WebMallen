@@ -1,0 +1,82 @@
+name: Add Analytics
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add Google Analytics
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          analytics = '''
+          <!-- Google Analytics -->
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-6CS6G81D0P"></script>
+          <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-6CS6G81D0P');
+          </script>
+          <!-- /Google Analytics -->
+          '''
+
+          if 'G-6CS6G81D0P' not in s:
+              s = s.replace('</head>', analytics + '\n</head>', 1)
+
+          tracking = '''
+            // Google Analytics: interactions
+            document.querySelectorAll('a[href="#contacto"]').forEach(link => {
+              link.addEventListener('click', () => gtag('event', 'contact_cta_click', {
+                link_text: link.textContent.trim()
+              }));
+            });
+
+            document.querySelectorAll('.map-link').forEach(link => {
+              link.addEventListener('click', () => gtag('event', 'map_click', {
+                link_text: link.textContent.trim()
+              }));
+            });
+
+            document.querySelectorAll('.carousel-button').forEach(button => {
+              button.addEventListener('click', () => gtag('event', 'gallery_navigation', {
+                direction: button.dataset.carousel
+              }));
+            });
+
+            document.querySelectorAll('.quality-list summary').forEach(summary => {
+              summary.addEventListener('click', () => gtag('event', 'quality_open', {
+                quality: summary.textContent.trim()
+              }));
+            });
+
+            document.querySelector('#contact-form')?.addEventListener('submit', () => {
+              gtag('event', 'contact_form_submit');
+            });
+          '''
+
+          marker = '            // Google Analytics: interactions'
+          if marker not in s:
+              s = s.replace('\n    const form = document.querySelector(\'#contact-form\');', '\n' + tracking + '\n    const form = document.querySelector(\'#contact-form\');', 1)
+
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit changes and remove temporary workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git rm .github/workflows/add-analytics.yml
+          git commit -m "Add Google Analytics tracking"
+          git push
