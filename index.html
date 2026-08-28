@@ -72,7 +72,7 @@
       </picture>
       <div class="panel">
         <div class="k">12 viviendas · Mallén</div>
-        <h1>Casa<br>y jardín.</h1>
+        <h1>12 viviendas adosadas en Mallén, Zaragoza.</h1>
         <p>Viviendas adosadas de 108 m² con 54 m² de jardín privado, en la Ribera del Ebro.</p>
         <div class="price">Desde 180.000 € + IVA</div>
         <a class="cta-link" href="#contacto">Solicitar información →</a>
@@ -367,7 +367,6 @@
       track.addEventListener('pointercancel', stop);
     });
 
-
   // Google Analytics: interactions
   document.querySelectorAll('a[href="#contacto"]').forEach(link => {
     link.addEventListener('click', () => gtag('event', 'contact_cta_click', {
@@ -376,9 +375,7 @@
   });
 
   document.querySelectorAll('.map-link').forEach(link => {
-    link.addEventListener('click', () => gtag('event', 'map_click', {
-      link_text: link.textContent.trim()
-    }));
+    link.addEventListener('click', () => gtag('event', 'map_click', { link_text: link.textContent.trim() }));
   });
 
   document.querySelectorAll('.carousel-button').forEach(button => {
