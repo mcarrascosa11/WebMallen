@@ -5,16 +5,16 @@
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <image:image><image:loc>https://mpmallen.es/Ext%202.jpg</image:loc><image:title>Casas adosadas de obra nueva MP Mallén</image:title></image:image>
-    <image:image><image:loc>https://mpmallen.es/02.jpg</image:loc><image:title>Interior de vivienda MP Mallén</image:title></image:image>
+    <image:image><image:loc>https://mpmallen.es/Ext%202.jpg</image:loc></image:image>
+    <image:image><image:loc>https://mpmallen.es/02.jpg</image:loc></image:image>
   </url>
   <url>
     <loc>https://mpmallen.es/casas-en-mallen.html</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <image:image><image:loc>https://mpmallen.es/Ext%202.jpg</image:loc><image:title>Casas en venta de obra nueva en Mallén</image:title></image:image>
-    <image:image><image:loc>https://mpmallen.es/03.jpg</image:loc><image:title>Interior de casa de obra nueva en Mallén</image:title></image:image>
-    <image:image><image:loc>https://mpmallen.es/04.jpg</image:loc><image:title>Exterior de viviendas adosadas en Mallén</image:title></image:image>
+    <image:image><image:loc>https://mpmallen.es/Ext%202.jpg</image:loc></image:image>
+    <image:image><image:loc>https://mpmallen.es/03.jpg</image:loc></image:image>
+    <image:image><image:loc>https://mpmallen.es/04.jpg</image:loc></image:image>
   </url>
 </urlset>
