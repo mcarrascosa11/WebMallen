@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MP Mallén — Doce casas de una planta en Mallén</title>
+<meta name="description" content="Doce viviendas unifamiliares de una sola planta, con jardín privado y garaje, en Mallén (Zaragoza). 108 m² construidos, 3 dormitorios, 2 baños. Desde 180.000 € + IVA.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f3f1ec">
+<link rel="preload" href="/propuesta/fonts/instrument-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Instrument Sans";src:url(/propuesta/fonts/instrument-sans-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Instrument Sans";src:url(/propuesta/fonts/instrument-sans-500.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Instrument Serif";src:url(/propuesta/fonts/instrument-serif-400-italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+
+:root{
+  --paper:#f3f1ec;
+  --paper-2:#ebe8e1;
+  --ink:#1c1c1a;
+  --grey:#6f6c66;
+  --rule:#d6d2c9;
+  --m:clamp(16px,3vw,40px);
+  --gap:clamp(12px,2vw,28px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 15px/1.55 "Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-feature-settings:"tnum" 1;-webkit-font-smoothing:antialiased}
+img,video{display:block;width:100%;height:auto}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
+a:hover{text-decoration-color:var(--grey)}
+:focus-visible{outline:1px solid var(--ink);outline-offset:3px}
+::selection{background:var(--ink);color:var(--paper)}
+
+.g{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);padding-inline:var(--m)}
+.meta{font-size:12.5px;line-height:1.45;color:var(--grey)}
+.serif{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.005em}
+
+/* Cabecera */
+.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:saturate(1.2) blur(8px);-webkit-backdrop-filter:saturate(1.2) blur(8px)}
+.top .g{height:52px;align-items:center;font-size:13px}
+.top .name{grid-column:1/5;font-weight:500;text-decoration:none}
+.top nav{grid-column:5/13;display:flex;justify-content:flex-end;gap:clamp(14px,2.2vw,32px)}
+.top nav a{text-decoration:none;color:var(--grey)}
+.top nav a:hover,.top nav a[aria-current]{color:var(--ink)}
+
+/* Apertura */
+.opening figure{margin:0;padding-inline:var(--m)}
+.opening .frame{aspect-ratio:2/1;max-height:calc(100svh - 120px);width:100%;overflow:hidden;background:var(--paper-2)}
+.opening .frame img{height:100%;object-fit:cover}
+figcaption{display:flex;justify-content:space-between;gap:16px;padding-top:9px}
+.intro{padding-top:clamp(48px,8vw,120px);padding-bottom:clamp(72px,10vw,150px);row-gap:40px}
+h1{grid-column:1/9;margin:0;font-weight:400;font-size:clamp(38px,5.4vw,86px);line-height:1.01;letter-spacing:-.032em}
+h1 .serif{letter-spacing:-.01em}h1,h2,.lead,.quote{text-wrap:balance}
+.sheet{grid-column:10/13;align-self:end}.sheet dl{margin:0}
+.sheet div{display:grid;grid-template-columns:7.5em 1fr;gap:12px;padding:9px 0;border-top:1px solid var(--rule);font-size:13.5px;line-height:1.4}
+.sheet div:last-of-type{border-bottom:1px solid var(--rule)}
+.sheet dt{color:var(--grey)}
+.sheet dd{margin:0}
+.sheet .go{display:inline-block;margin-top:18px;font-size:13.5px}
+
+/* Secciones */
+section{scroll-margin-top:52px}
+.block{padding-block:clamp(72px,10vw,150px);border-top:1px solid var(--rule)}
+.label{grid-column:1/4;font-size:13px;margin:0;font-weight:500}
+.label span{display:block;color:var(--grey);font-weight:400}
+.text{grid-column:4/10}
+.lead{font-size:clamp(20px,1.9vw,28px);line-height:1.32;letter-spacing:-.012em;margin:0 0 1.2em}
+.text p{max-width:62ch}
+.text p+p{margin-top:0}
+.aside{grid-column:10/13;align-self:end}
+.quote{grid-column:4/12;margin:clamp(56px,8vw,120px) 0 0;font-size:clamp(30px,3.6vw,56px);line-height:1.08;letter-spacing:-.01em}
+
+/* Imágenes */
+.plates{row-gap:clamp(48px,7vw,110px);padding-bottom:clamp(72px,10vw,150px)}
+.plates figure{margin:0}
+.p-full{grid-column:1/13}
+.p-a{grid-column:1/8}
+.p-b{grid-column:9/13;align-self:start;margin-top:22%}
+.p-c{grid-column:4/11}
+.p-full img{aspect-ratio:16/8;object-fit:cover}
+.p-a img,.p-c img{aspect-ratio:3/2;object-fit:cover}
+.p-b img{aspect-ratio:4/5;object-fit:cover;object-position:55% 50%}
+
+/* Planta */
+.plan-intro{margin:0 0 clamp(40px,6vw,80px);font-size:clamp(17px,1.4vw,20px);line-height:1.45;max-width:46ch}.plan-wrap{grid-column:1/8;margin:0;background:#fff;padding:clamp(16px,3vw,48px)}
+.plan-wrap img{filter:grayscale(1) contrast(1.08) brightness(1.04);mix-blend-mode:multiply}
+.plan-wrap figcaption{padding-top:16px}
+.areas{grid-column:9/13;align-self:start;width:100%;border-collapse:collapse;font-size:13.5px}
+.areas caption{text-align:left;font-weight:500;padding-bottom:14px;font-size:13px}
+.areas th,.areas td{padding:7px 0;border-top:1px solid var(--rule);font-weight:400;text-align:left}
+.areas td{text-align:right;white-space:nowrap}
+.areas tbody th{color:var(--ink)}
+.areas .sub th,.areas .sub td{color:var(--grey)}
+.areas tfoot th,.areas tfoot td{font-weight:500;border-top:1px solid var(--ink)}
+.areas tfoot tr+tr th,.areas tfoot tr+tr td{font-weight:400;border-top:1px solid var(--rule)}
+.note{grid-column:9/13;margin-top:14px}
+
+/* Vídeo */
+.film{padding-bottom:clamp(72px,10vw,150px)}
+.film figure{grid-column:1/13;margin:0}
+.film video{aspect-ratio:16/9;object-fit:cover;background:var(--ink)}
+
+/* Construcción */
+.spec{grid-column:4/13;margin:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:var(--gap)}
+.spec div{display:grid;grid-template-columns:minmax(8em,.42fr) 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--rule)}
+.spec dt{font-weight:500;font-size:13.5px}
+.spec dd{margin:0;color:var(--grey);font-size:14px;line-height:1.55}
+.spec .em dd{color:var(--ink)}
+.spec-note{grid-column:4/10;margin-top:28px}
+
+/* Lugar */
+.place-text{grid-column:4/10}
+.place-data{grid-column:10/13;align-self:end;margin:0}
+.place-data div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid var(--rule);font-size:13.5px}
+.place-data div:last-of-type{border-bottom:1px solid var(--rule)}
+.place-data dt{color:var(--grey)}
+.place-data dd{margin:0}
+.place-imgs{margin-top:clamp(56px,8vw,110px);row-gap:40px;align-items:end}
+.place-imgs figure{margin:0}
+.i-1{grid-column:1/7}.i-2{grid-column:7/10}.i-3{grid-column:10/13}
+.place-imgs img{filter:saturate(.78) contrast(.97)}.i-1 img{aspect-ratio:4/3;object-fit:cover}
+.i-2 img,.i-3 img{aspect-ratio:3/4;object-fit:cover}
+.coords{grid-column:4/13;margin-top:28px;display:flex;flex-wrap:wrap;gap:8px 28px}
+
+/* Contacto */
+.contact{background:var(--ink);color:var(--paper);border-top:0}
+.contact .label span,.contact .meta{color:#a8a49c}
+.contact h2{grid-column:1/13;margin:0 0 clamp(48px,7vw,96px);font-weight:400;font-size:clamp(38px,5.4vw,86px);line-height:1.01;letter-spacing:-.032em}
+.direct{grid-column:1/6;display:flex;flex-direction:column;gap:22px}
+.direct a{font-size:clamp(20px,1.9vw,28px);letter-spacing:-.012em;text-decoration:none;border-bottom:1px solid #4a4945;padding-bottom:6px;width:max-content;max-width:100%}
+.direct a:hover{border-color:var(--paper)}
+form{grid-column:7/13;display:grid;grid-template-columns:1fr 1fr;gap:26px var(--gap)}
+.f{display:flex;flex-direction:column;gap:6px}
+.f-wide{grid-column:1/-1}
+label{font-size:12.5px;color:#a8a49c}
+input,textarea{font:inherit;font-size:16px;color:var(--paper);background:transparent;border:0;border-bottom:1px solid #4a4945;border-radius:0;padding:8px 0;outline:none}
+input:focus,textarea:focus{border-color:var(--paper)}
+textarea{resize:vertical;min-height:88px}
+.consent{grid-column:1/-1;display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:#a8a49c;line-height:1.5}
+.consent input{width:15px;height:15px;margin:1px 0 0;accent-color:var(--paper)}
+button{grid-column:1/-1;justify-self:start;font:inherit;font-size:14px;color:var(--ink);background:var(--paper);border:0;padding:13px 22px;cursor:pointer}
+button:hover{background:#fff}
+button:disabled{opacity:.5;cursor:wait}
+.status{grid-column:1/-1;margin:0;font-size:13.5px}
+.status[hidden]{display:none}
+
+footer{background:var(--ink);color:#a8a49c;font-size:12.5px}
+footer .g{padding-block:28px;border-top:1px solid #3a3936}
+footer .l{grid-column:1/7}footer .r{grid-column:7/13;text-align:right}
+
+/* Aparición suave de imágenes */
+.js .reveal{opacity:0;transform:translateY(14px);transition:opacity .9s ease,transform .9s ease}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .reveal{opacity:1;transform:none;transition:none}}
+
+/* Tablet */
+@media (max-width:1000px){
+  h1{grid-column:1/13}
+  .sheet{grid-column:1/8}
+  .label{grid-column:1/13;margin-bottom:28px}
+  .text,.place-text,.spec-note{grid-column:1/10}
+  .aside,.place-data{grid-column:1/8;margin-top:36px}
+  .quote{grid-column:1/13}
+  .spec{grid-column:1/13}
+  .plan-wrap{grid-column:1/13}
+  .areas,.note{grid-column:1/8}
+  .areas{margin-top:48px}
+  .coords{grid-column:1/13}
+  .direct{grid-column:1/13;margin-bottom:56px}
+  form{grid-column:1/13}
+}
+/* Móvil */
+@media (max-width:640px){
+  body{font-size:15px}
+  .top nav a:not(.keep){display:none}
+  .top .name{grid-column:1/9}
+  .top nav{grid-column:9/13}
+  .opening .frame{aspect-ratio:4/5;max-height:none}
+  .opening .frame img{object-position:38% 50%}
+  .sheet,.text,.place-text,.aside,.place-data,.areas,.note,.spec-note{grid-column:1/13}
+  .spec{grid-template-columns:1fr}
+  .spec div{grid-template-columns:1fr;gap:4px}
+  .p-a,.p-b,.p-c{grid-column:1/13}
+  .p-b{margin-top:0}
+  .p-full img{aspect-ratio:4/3}
+  .p-b img{aspect-ratio:4/5}
+  .i-1{grid-column:1/13}.i-2{grid-column:1/7}.i-3{grid-column:7/13}
+  form{grid-template-columns:1fr}
+  footer .l,footer .r{grid-column:1/13;text-align:left}
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+
+<header class="top">
+  <div class="g">
+    <a class="name" href="#inicio">MP Mallén</a>
+    <nav aria-label="Secciones">
+      <a href="#proyecto">Proyecto</a>
+      <a href="#planta">Planta</a>
+      <a href="#construccion">Construcción</a>
+      <a href="#lugar">Lugar</a>
+      <a class="keep" href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="opening" id="inicio">
+  <figure>
+    <div class="frame"><img src="/Ext%202.jpg" srcset="/img/exterior-1200.jpg 1200w, /Ext%202.jpg 2400w" sizes="100vw" width="2400" height="1213" alt="Calle de las doce viviendas MP Mallén al atardecer" fetchpriority="high"></div>
+    <figcaption class="meta"><span>01 — Calle de acceso al atardecer</span><span>Render</span></figcaption>
+  </figure>
+  <div class="g intro">
+    <h1>Doce casas de una planta, <span class="serif">con jardín,</span> en Mallén.</h1>
+    <div class="sheet"><dl>
+      <div><dt>Programa</dt><dd>12 viviendas unifamiliares adosadas</dd></div>
+      <div><dt>Superficie</dt><dd>108,30 m² construidos</dd></div>
+      <div><dt>Jardín</dt><dd>54 m² privado</dd></div>
+      <div><dt>Distribución</dt><dd>3 dormitorios, 2 baños, garaje</dd></div>
+      <div><dt>Lugar</dt><dd>Mallén, Zaragoza</dd></div>
+      <div><dt>Precio</dt><dd>Desde 180.000 € + IVA</dd></div>
+    </dl>
+      <a class="go" href="#contacto">Solicitar información ↓</a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="proyecto">
+  <div class="g">
+    <h2 class="label">Proyecto<span>02</span></h2>
+    <div class="text">
+      <p class="lead">Doce casas iguales, de una sola planta, dispuestas en hilera a lo largo de una calle. Cada una tiene una cara a la calle, con el acceso y el garaje, y otra a su propio jardín.</p>
+      <p>La vivienda se organiza en tres franjas. En el centro, salón, comedor y cocina forman un único espacio de 22 m² que atraviesa la casa desde el porche de entrada hasta la terraza cubierta. A un lado, dos dormitorios con un baño compartido; al otro, el dormitorio principal con su propio baño y el garaje.</p>
+      <p>Todo queda en un mismo nivel, sin escaleras: una casa cómoda desde el primer día y fácil de vivir dentro de treinta años.</p>
+    </div>
+    <p class="aside meta">Superficie construida 108,30 m²<br>Superficie útil 91,60 m²<br>Jardín privado 54 m²</p>
+    <p class="quote serif">Entre la calle y el jardín, una casa abierta a la luz.</p>
+  </div>
+</section>
+
+<div class="g plates">
+  <figure class="p-full reveal">
+    <img src="/04.jpg" srcset="/img/04-1200.jpg 1200w, /04.jpg 2400w" sizes="100vw" width="2400" height="1350" alt="Fachada al jardín con terraza cubierta" loading="lazy" decoding="async">
+    <figcaption class="meta"><span>02 — Fachada al jardín y terraza cubierta</span><span>Render</span></figcaption>
+  </figure>
+  <figure class="p-a reveal">
+    <img src="/02.jpg" srcset="/img/02-1200.jpg 1200w, /02.jpg 2400w" sizes="(max-width:640px) 100vw, 58vw" width="2400" height="1350" alt="Salón, comedor y cocina abiertos al jardín" loading="lazy" decoding="async">
+    <figcaption class="meta"><span>03 — Salón y comedor hacia el jardín</span></figcaption>
+  </figure>
+  <figure class="p-b reveal">
+    <img src="/05.jpg" srcset="/img/05-1200.jpg 1200w, /05.jpg 2400w" sizes="(max-width:640px) 100vw, 32vw" width="2400" height="1350" alt="Dormitorio con salida al jardín" loading="lazy" decoding="async">
+    <figcaption class="meta"><span>04 — Dormitorio</span></figcaption>
+  </figure>
+  <figure class="p-c reveal">
+    <img src="/03.jpg" srcset="/img/03-1200.jpg 1200w, /03.jpg 2400w" sizes="(max-width:640px) 100vw, 58vw" width="2400" height="1350" alt="Vista del espacio de salón, comedor y cocina" loading="lazy" decoding="async">
+    <figcaption class="meta"><span>05 — Salón-cocina</span></figcaption>
+  </figure>
+</div>
+
+<section class="block" id="planta">
+  <div class="g">
+    <h2 class="label">Planta<span>03</span></h2>
+    <p class="text plan-intro">Las doce casas comparten la misma planta: 91,60 m² útiles en un solo nivel, con el salón-cocina como pieza central entre los dormitorios y el garaje.</p>
+  </div>
+  <div class="g">
+    <figure class="plan-wrap reveal">
+      <img src="/Planta.jpg" srcset="/img/planta-1200.jpg 1200w, /Planta.jpg 1940w" sizes="(max-width:1000px) 100vw, 55vw" width="1940" height="1792" alt="Planta de la vivienda tipo con salón-cocina central, tres dormitorios, dos baños, terraza, porche y garaje" loading="lazy" decoding="async">
+      <figcaption class="meta"><span>Vivienda tipo</span></figcaption>
+    </figure>
+    <table class="areas">
+      <caption>Cuadro de superficies útiles</caption>
+      <tbody>
+        <tr><th scope="row">Salón-cocina</th><td>22,00 m²</td></tr>
+        <tr><th scope="row">Dormitorio 1</th><td>13,15 m²</td></tr>
+        <tr><th scope="row">Baño dormitorio 1</th><td>3,50 m²</td></tr>
+        <tr><th scope="row">Dormitorio 2</th><td>11,80 m²</td></tr>
+        <tr><th scope="row">Dormitorio 3</th><td>11,80 m²</td></tr>
+        <tr><th scope="row">Baño</th><td>3,60 m²</td></tr>
+        <tr><th scope="row">Recibidor</th><td>1,65 m²</td></tr>
+        <tr><th scope="row">Distribuidor</th><td>0,80 m²</td></tr>
+        <tr><th scope="row">Garaje</th><td>19,00 m²</td></tr>
+        <tr class="sub"><th scope="row">Terraza cubierta</th><td>6,30 m²</td></tr>
+        <tr class="sub"><th scope="row">Porche</th><td>2,30 m²</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><th scope="row">Superficie útil*</th><td>91,60 m²</td></tr>
+        <tr><th scope="row">Superficie construida</th><td>108,30 m²</td></tr>
+        <tr><th scope="row">Jardín privado</th><td>54,00 m²</td></tr>
+      </tfoot>
+    </table>
+    <p class="note meta">* Terraza y porche computan al 50 %.</p>
+  </div>
+</section>
+
+<div class="g film">
+  <figure class="reveal">
+    <video controls playsinline preload="none" poster="/img/04B-1200.jpg"><source src="/2604VC_Video_compressed.mp4" type="video/mp4"></video>
+    <figcaption class="meta"><span>06 — Recorrido por la vivienda</span><span>Vídeo</span></figcaption>
+  </figure>
+</div>
+
+<section class="block" id="construccion">
+  <div class="g">
+    <h2 class="label">Construcción<span>04</span></h2>
+    <dl class="spec">
+      <div><dt>Estructura y cerramiento</dt><dd>Muros de hormigón armado con trasdosado interior de placa de yeso laminado y aislamiento de lana mineral.</dd></div>
+      <div><dt>Solera</dt><dd>Hormigón armado sobre encachado de piedra y aislamiento térmico XPS.</dd></div>
+      <div><dt>Cubierta</dt><dd>Inclinada de teja o plana invertida con grava, según configuración.</dd></div>
+      <div><dt>Fachada</dt><dd>Enfoscado de mortero y pintura, o pintura con arena de sílice.</dd></div>
+      <div><dt>Carpintería exterior</dt><dd>PVC practicable y oscilobatiente. Acabado blanco, gris antracita, imitación madera o bicolor.</dd></div>
+      <div><dt>Interior</dt><dd>Tabiquería de doble placa de yeso laminado, falso techo, pavimento de gres cerámico y pintura plástica.</dd></div>
+      <div><dt>Puertas</dt><dd>Entrada de seguridad. Puertas interiores lacadas en blanco.</dd></div>
+      <div><dt>Baños</dt><dd>Plato de ducha de resina, mampara, grifería y revestimiento cerámico en zonas húmedas.</dd></div>
+      <div><dt>Garaje</dt><dd>Terminado, con puerta seccional de panel sándwich y punto de luz.</dd></div>
+      <div class="em"><dt>Cocina</dt><dd>No incluida en el precio.</dd></div>
+    </dl>
+    <p class="spec-note meta">Memoria orientativa basada en las partidas de ejecución previstas. Las soluciones definitivas se concretarán en la documentación contractual y de proyecto.</p>
+  </div>
+</section>
+
+<section class="block" id="lugar">
+  <div class="g">
+    <h2 class="label">Lugar<span>05</span></h2>
+    <div class="place-text">
+      <p class="lead">Mallén está en la Ribera del Ebro, entre Zaragoza y Tudela. Un pueblo de escala cercana, con servicios, fiestas propias y un paisaje abierto que llega hasta las Bardenas Reales.</p>
+      <p>La AP-68, la N-232 y la línea de tren Castejón–Zaragoza lo conectan con las ciudades del entorno.</p>
+    </div>
+    <dl class="place-data">
+      <div><dt>Tudela</dt><dd>28 km</dd></div>
+      <div><dt>Bardenas Reales</dt><dd>≈ 35 km</dd></div>
+      <div><dt>Zaragoza</dt><dd>57 km</dd></div>
+    </dl>
+  </div>
+  <div class="g place-imgs">
+    <figure class="i-1 reveal">
+      <img src="/Mallen_1.jpg" srcset="/img/mallen-1-1200.jpg 1200w, /Mallen_1.jpg 2400w" sizes="(max-width:640px) 100vw, 50vw" width="2400" height="1800" alt="Mallén" loading="lazy" decoding="async">
+      <figcaption class="meta"><span>Mallén</span></figcaption>
+    </figure>
+    <figure class="i-2 reveal">
+      <img src="/Mallen_2.jpg" width="960" height="720" alt="Hoguera en una plaza de Mallén durante las fiestas" loading="lazy" decoding="async">
+      <figcaption class="meta"><span>Fiestas en la plaza</span></figcaption>
+    </figure>
+    <figure class="i-3 reveal">
+      <img src="/57414076_2825488057492544_5081431775616434176_n.jpg" width="1080" height="814" alt="Castildetierra, en las Bardenas Reales, bajo la Vía Láctea" loading="lazy" decoding="async">
+      <figcaption class="meta"><span>Bardenas Reales</span></figcaption>
+    </figure>
+  </div>
+  <div class="g">
+    <p class="coords meta"><span>41°54′11″ N · 1°25′22″ O</span><a href="https://www.google.com/maps/dir/?api=1&amp;destination=41.903027,-1.422822" target="_blank" rel="noopener">Abrir en el mapa ↗</a></p>
+  </div>
+</section>
+
+<section class="block contact" id="contacto">
+  <div class="g">
+    <h2>Información <span class="serif">y visitas.</span></h2>
+    <div class="direct">
+      <p class="meta" style="margin:0">Planos, disponibilidad y condiciones de compra.</p>
+      <a href="tel:+34682378623">682 378 623</a>
+      <a href="mailto:gestion@modproyect.com">gestion@modproyect.com</a>
+    </div>
+    <form id="contact-form" novalidate>
+      <div class="f"><label for="c-name">Nombre</label><input id="c-name" name="nombre" autocomplete="name" required></div>
+      <div class="f"><label for="c-phone">Teléfono</label><input id="c-phone" name="telefono" type="tel" autocomplete="tel" required></div>
+      <div class="f f-wide"><label for="c-email">Email</label><input id="c-email" name="email" type="email" autocomplete="email" required></div>
+      <div class="f f-wide"><label for="c-msg">Mensaje</label><textarea id="c-msg" name="mensaje" rows="3" required>Me gustaría recibir información sobre las viviendas.</textarea></div>
+      <label class="consent"><input type="checkbox" name="privacidad" required><span>Acepto el tratamiento de mis datos para atender esta solicitud.</span></label>
+      <button type="submit">Enviar solicitud</button>
+      <p class="status" id="c-status" role="status" hidden></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="g">
+    <span class="l">MP Mallén · 12 viviendas en Mallén, Zaragoza</span>
+    <span class="r">Imágenes de las viviendas: renders orientativos</span>
+  </div>
+</footer>
+
+<script>
+// Aparición suave de las imágenes al entrar en pantalla
+(function(){
+  var items=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){items.forEach(function(el){el.classList.add('in')});return}
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+  items.forEach(function(el){io.observe(el)});
+})();
+
+// Sección activa en la navegación
+(function(){
+  var links={};document.querySelectorAll('.top nav a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(e){var a=links[e.target.id];if(!a)return;if(e.isIntersecting){Object.values(links).forEach(function(l){l.removeAttribute('aria-current')});a.setAttribute('aria-current','true')}})},{rootMargin:'-45% 0px -50% 0px'});
+  Object.keys(links).forEach(function(id){var s=document.getElementById(id);if(s)io.observe(s)});
+})();
+
+// Formulario: mismo backend que la web actual (/api/contact), con correo como alternativa
+(function(){
+  var form=document.getElementById('contact-form');if(!form)return;
+  var status=document.getElementById('c-status');var button=form.querySelector('button');
+  form.addEventListener('submit',async function(event){
+    event.preventDefault();
+    if(!form.reportValidity())return;
+    var d=new FormData(form);
+    var payload={nombre:d.get('nombre'),email:d.get('email'),telefono:d.get('telefono'),mensaje:d.get('mensaje'),privacidad:d.get('privacidad')==='on'};
+    button.disabled=true;status.hidden=false;status.textContent='Enviando…';
+    try{
+      var r=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      if(!r.ok)throw new Error('contact_api');
+      status.textContent='Gracias. Te escribiremos en breve.';form.reset();
+    }catch(e){
+      var body=['Nombre: '+payload.nombre,'Email: '+payload.email,'Teléfono: '+payload.telefono,'','Mensaje:',payload.mensaje].join('\n');
+      status.textContent='No se ha podido enviar automáticamente. Se abrirá tu correo para completar el envío.';
+      window.location.href='mailto:gestion@modproyect.com?subject='+encodeURIComponent('Información sobre MP Mallén')+'&body='+encodeURIComponent(body);
+    }finally{button.disabled=false}
+  });
+})();
+</script>
+</body>
+</html>
