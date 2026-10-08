@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MP Mallén — 12 casas, 1 planta</title>
+<title>MP Mallén — 12 casas en Mallén</title>
 <meta name="description" content="Doce viviendas unifamiliares de una sola planta, con jardín privado y garaje, en Mallén (Zaragoza). 108,30 m² construidos, 3 dormitorios, 2 baños. Desde 180.000 € + IVA.">
 <meta name="robots" content="noindex,nofollow">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#111111">
 <link rel="preload" href="/propuesta/fonts/instrument-sans-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/propuesta/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -20,77 +20,105 @@
   --ink:#111111;
   --grey:#8a8a86;
   --rule:#e6e6e2;
-  --panel:clamp(360px,32vw,500px);
+  --panel:clamp(340px,30vw,480px);
   --mono:"Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --ease:cubic-bezier(.2,.7,.2,1);
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--white);color:var(--ink);font:400 15px/1.5 "Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
 img,video{display:block;max-width:100%;height:auto}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.25em}
-:focus-visible{outline:1px solid var(--ink);outline-offset:3px}
+:focus-visible{outline:1px solid currentColor;outline-offset:3px}
 ::selection{background:var(--ink);color:var(--white)}
 .mono{font-family:var(--mono);font-size:11.5px;line-height:1.55;letter-spacing:.01em}
 .grey{color:var(--grey)}
 
-/* ── Panel fijo (escritorio) ───────────────────────── */
-.panel{position:fixed;inset:0 auto 0 0;width:var(--panel);padding:28px 32px;border-right:1px solid var(--rule);display:flex;flex-direction:column;background:var(--white);z-index:5}
+/* ── Portada: solo la foto y el nombre ─────────────── */
+.cover{position:relative;height:100vh;height:100svh;min-height:520px;overflow:hidden;background:#1b2230;color:#fff}
+.cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.28) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 52%,rgba(0,0,0,.5) 100%);pointer-events:none}
+.cover-top,.cover-bottom{position:absolute;left:clamp(16px,2.6vw,40px);right:clamp(16px,2.6vw,40px);z-index:1;display:flex;justify-content:space-between;gap:24px}
+.cover-top{top:clamp(16px,3vh,32px);align-items:baseline}
+.cover-top a{text-decoration:none;font-weight:500;font-size:15px}
+.cover-bottom{bottom:clamp(20px,4.5vh,48px);align-items:flex-end}
+.cover h1{margin:0;font-weight:400;font-size:clamp(46px,8.4vw,150px);line-height:.92;letter-spacing:-.045em;text-wrap:balance}
+.cover .sub{margin:clamp(14px,2vh,22px) 0 0;opacity:.9}
+.cover .down{flex:none;text-decoration:none;opacity:.9;padding-bottom:4px}
+.cover .down:hover{opacity:1}
+.js .cover h1,.js .cover .sub,.js .cover-top{animation:rise 1.1s var(--ease) both}
+.js .cover .sub{animation-delay:.12s}
+.js .cover-top{animation-delay:.2s}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* ── Panel fijo (escritorio): entra al hacer scroll ── */
+.panel{position:fixed;inset:0 auto 0 0;width:var(--panel);padding:clamp(18px,3vh,28px) 30px;border-right:1px solid var(--rule);display:flex;flex-direction:column;background:var(--white);z-index:5;overflow-y:auto;scrollbar-width:none}
+.panel::-webkit-scrollbar{display:none}
+.js .panel{transform:translate3d(calc((var(--p,0) - 1) * 100%),0,0);will-change:transform}
+.js .panel:not(.in){box-shadow:none}
 .panel .id{display:flex;justify-content:space-between;align-items:baseline}
 .panel .id a{text-decoration:none;font-weight:500;font-size:15px}
-.panel h1{margin:clamp(40px,8vh,96px) 0 0;font-weight:400;font-size:clamp(30px,2.6vw,44px);line-height:1.04;letter-spacing:-.03em}
-.panel .now{margin-top:auto;padding-top:32px}
-.counter{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+.panel h2.claim{margin:clamp(24px,7vh,88px) 0 0;font-weight:400;font-size:clamp(28px,min(2.5vw,5vh),44px);line-height:1.04;letter-spacing:-.03em}
+.panel .now{margin-top:auto;padding-top:24px}
+.counter{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}
 .counter b{font-family:var(--mono);font-weight:400;font-size:12px}
 .ticks{display:flex;gap:4px;flex:1}
 .ticks i{flex:1;height:1px;background:var(--rule);transition:background .4s}
 .ticks i.on{background:var(--ink)}
-.now-body{min-height:9.5em;transition:opacity .35s ease}
+.now-body{min-height:8.5em;transition:opacity .35s ease}
 .now-body.fade{opacity:0}
-.now-body h2{margin:0 0 8px;font-weight:500;font-size:15px}
+.now-body h3{margin:0 0 6px;font-weight:500;font-size:15px}
 .now-body p{margin:0;max-width:34ch;color:#3d3d3a}
-.sheet{margin:28px 0 0;border-top:1px solid var(--rule)}
-.sheet div{display:flex;justify-content:space-between;gap:16px;padding:7px 0;border-bottom:1px solid var(--rule)}
+.sheet{margin:22px 0 0;border-top:1px solid var(--rule)}
+.sheet div{display:flex;justify-content:space-between;gap:16px;padding:6px 0;border-bottom:1px solid var(--rule)}
 .sheet dt{color:var(--grey)}
 .sheet dd{margin:0;text-align:right}
-.panel .links{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:20px}
+.panel .links{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:16px}
 .panel .links a{text-decoration:none}
 .panel .links a:hover{text-decoration:underline}
-.panel .cta{display:flex;justify-content:space-between;align-items:center;margin-top:22px;padding:14px 16px;background:var(--ink);color:var(--white);text-decoration:none;font-size:14px}
-.panel .cta:hover{background:#2a2a2a}
+.cta{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding:13px 16px;background:var(--ink);color:var(--white);text-decoration:none;font-size:14px}
+.cta:hover{background:#2a2a2a}
+/* El bloque "se construye": cada pieza aparece a medida que el panel entra */
+.js .panel .build{opacity:0;transform:translateY(12px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.js .panel .build.on{opacity:1;transform:none}
+@media (max-height:820px) and (min-width:901px){
+  .panel .links{display:none}
+  .now-body{min-height:7.2em}
+  .sheet{margin-top:16px}
+}
 
 /* ── Láminas ───────────────────────────────────────── */
 main{margin-left:var(--panel)}
-.plate{min-height:100vh;min-height:100svh;padding:6vh 5vw;display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid var(--rule);position:relative}
+.plate{min-height:100vh;min-height:100svh;padding:6vh 5vw;display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid var(--rule);position:relative;scroll-margin-top:0}
 .plate figure{margin:0}
 .plate figcaption{display:flex;justify-content:space-between;gap:16px;margin-top:10px}
 .plate-text{display:none}
 .no-js .plate-text{display:block;margin-top:28px;max-width:52ch}
-.no-js .plate-text h2{font-size:15px;font-weight:500;margin:0 0 6px}
+.no-js .plate-text h3{font-size:15px;font-weight:500;margin:0 0 6px}
 .no-js .plate-text p{margin:0}
+.panel-only{display:none!important}
 
-/* Variantes de composición */
 .bleed{padding:0}
 .bleed figure{height:100vh;height:100svh;position:relative}
-.bleed img,.bleed video{width:100%;height:100%;object-fit:cover}
+.bleed img{width:100%;height:100%;object-fit:cover}
 .bleed figcaption{position:absolute;left:20px;right:20px;bottom:16px;margin:0;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35)}
 .hang figure{width:min(100%,56vw);align-self:center}
 .hang img{width:100%}
 .portrait figure{align-self:center}
 .portrait img{height:min(78vh,78svh);width:auto;aspect-ratio:4/5;object-fit:cover;object-position:55% 50%}
-.offset figure{width:72%;align-self:flex-end}.offset img{width:100%}
+.offset figure{width:72%;align-self:flex-end}
+.offset img{width:100%}
 
-/* Lámina de planta */
 .plan{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(220px,.65fr);gap:5vw;align-items:center}
-.plan img{filter:grayscale(1) contrast(1.06) brightness(1.03);mix-blend-mode:multiply}
+.plan img{filter:grayscale(1) contrast(1.06) brightness(1.03);mix-blend-mode:multiply;max-height:84vh;width:auto;margin:auto}
 .areas{width:100%;border-collapse:collapse}
 .areas caption{text-align:left;padding-bottom:12px;color:var(--grey)}
-.areas th,.areas td{padding:6px 0;border-top:1px solid var(--rule);font-weight:400;text-align:left}
+.areas th,.areas td{padding:5px 0;border-top:1px solid var(--rule);font-weight:400;text-align:left}
 .areas td{text-align:right;white-space:nowrap}
 .areas .sub{color:var(--grey)}
 .areas tfoot th,.areas tfoot td{border-top:1px solid var(--ink)}
 .areas tfoot tr+tr th,.areas tfoot tr+tr td{border-top:1px solid var(--rule)}
 
-/* Lámina de texto: construcción */
 .spec{margin:0;display:grid;grid-template-columns:1fr 1fr;column-gap:4vw;max-width:980px;width:100%;align-self:center}
 .spec div{display:grid;grid-template-columns:11em 1fr;gap:16px;padding:12px 0;border-top:1px solid var(--rule)}
 .spec dt{font-weight:500;font-size:14px}
@@ -98,17 +126,15 @@ main{margin-left:var(--panel)}
 .spec-note{max-width:980px;width:100%;align-self:center;margin:24px 0 0}
 .plate-title{align-self:center;max-width:980px;width:100%;margin:0 0 40px;font-weight:400;font-size:clamp(28px,2.6vw,40px);letter-spacing:-.025em;line-height:1.05}
 
-/* Lámina de lugar */
 .place{display:grid;grid-template-columns:1.25fr .75fr;gap:2vw;align-items:end;width:100%}
-.place .tall img{aspect-ratio:3/4;object-fit:cover;width:100%}
-.place .wide img{aspect-ratio:4/3;object-fit:cover;width:100%}
+.place .tall img{aspect-ratio:3/4;object-fit:cover;width:100%;max-height:62vh}
+.place .wide img{aspect-ratio:4/3;object-fit:cover;width:100%;max-height:62vh}
 .place img{filter:saturate(.8)}
-.dist{margin:40px 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:2vw;width:100%}
+.dist{margin:36px 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:2vw;width:100%}
 .dist div{border-top:1px solid var(--ink);padding-top:10px}
 .dist dt{color:var(--grey)}
 .dist dd{margin:4px 0 0;font-size:clamp(22px,2vw,30px);letter-spacing:-.02em}
 
-/* Lámina de contacto */
 .contact{background:var(--ink);color:var(--white);border-bottom:0}
 .contact .grey{color:#9a9a96}
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5vw;max-width:1080px;width:100%;align-self:center}
@@ -131,31 +157,30 @@ form button:disabled{opacity:.5;cursor:wait}
 .status[hidden]{display:none}
 .foot{position:absolute;left:5vw;right:5vw;bottom:20px;display:flex;justify-content:space-between;gap:16px;color:#77776f}
 
-.panel-only{display:none!important}
-/* Barra superior (móvil) */
-.bar{display:none}
+.bar,.intro-m{display:none}
 
 /* ── Móvil y tablet ────────────────────────────────── */
 @media (max-width:900px){
   .panel{display:none}
   main{margin-left:0}
+  .cover h1{font-size:clamp(44px,13vw,72px)}
+  .cover-bottom{flex-direction:column;align-items:flex-start;gap:18px}
   .bar{display:flex;position:sticky;top:0;z-index:5;justify-content:space-between;align-items:center;height:48px;padding:0 16px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
   .bar a{text-decoration:none;font-weight:500}
   .intro-m{display:block;padding:40px 16px 48px;border-bottom:1px solid var(--rule)}
-  .intro-m h1{margin:0 0 32px;font-weight:400;font-size:clamp(32px,9vw,44px);line-height:1.04;letter-spacing:-.03em}
-  .intro-m .cta{display:flex;justify-content:space-between;margin-top:24px;padding:14px 16px;background:var(--ink);color:var(--white);text-decoration:none}
+  .intro-m h2{margin:0 0 28px;font-weight:400;font-size:clamp(32px,9vw,44px);line-height:1.04;letter-spacing:-.03em}
   .plate{min-height:0;padding:16px 16px 48px}
   .plate-text{display:block;margin-top:20px}
-  .plate-text h2{font-size:15px;font-weight:500;margin:0 0 6px}
+  .plate-text h3{font-size:15px;font-weight:500;margin:0 0 6px}
   .plate-text p{margin:0;color:#3d3d3a}
   .bleed{padding:0 0 48px}
   .bleed figure{height:auto}
-  .bleed img,.bleed video{height:auto;aspect-ratio:4/5}
-  .bleed video{aspect-ratio:16/9}
+  .bleed img{height:auto;aspect-ratio:4/5}
   .bleed figcaption{position:static;color:var(--grey);text-shadow:none;margin:10px 16px 0}
   .bleed .plate-text{margin:20px 16px 0}
   .hang figure,.offset figure{width:100%}
   .portrait img{height:auto;width:100%}
+  .plan img{max-height:none;width:100%}
   .plan,.place,.contact-grid,.spec,form{grid-template-columns:1fr}
   .spec div{grid-template-columns:1fr;gap:4px}
   .plate-title{margin:24px 0 24px}
@@ -165,38 +190,53 @@ form button:disabled{opacity:.5;cursor:wait}
   .contact{padding:56px 16px 96px}
   .foot{left:16px;right:16px;flex-direction:column;gap:2px}
 }
-@media (min-width:901px){.intro-m{display:none}}
-@media (prefers-reduced-motion:reduce){.now-body,.ticks i{transition:none}}
+@media (prefers-reduced-motion:reduce){
+  .now-body,.ticks i,.js .panel .build{transition:none}
+  .js .cover h1,.js .cover .sub,.js .cover-top{animation:none}
+}
 </style>
 </head>
 <body class="no-js">
 <script>document.body.classList.replace('no-js','js')</script>
 
-<!-- Panel fijo: identidad, lámina actual y ficha -->
-<aside class="panel" aria-label="Ficha del proyecto">
-  <div class="id"><a href="#l01">MP Mallén</a><span class="mono grey">41°54′N 1°25′O</span></div>
-  <h1>12 casas.<br>1 planta.<br>1 jardín.</h1>
+<!-- Portada: la foto y el nombre, nada más -->
+<header class="cover" id="inicio">
+  <img src="/Ext%202.jpg" srcset="/img/exterior-1200.jpg 1200w, /Ext%202.jpg 2400w" sizes="100vw" width="2400" height="1213" alt="Calle de acceso a las doce viviendas al atardecer" fetchpriority="high">
+  <div class="cover-top"><a href="#inicio">MP Mallén</a><span class="mono">41°54′N 1°25′O</span></div>
+  <div class="cover-bottom">
+    <div>
+      <h1>12 casas en Mallén</h1>
+      <p class="sub mono">Una planta · jardín privado · garaje — desde 180.000 € + IVA</p>
+    </div>
+    <a class="down mono" href="#l01">Ver el proyecto ↓</a>
+  </div>
+</header>
+
+<!-- Panel fijo: aparece al bajar y se monta pieza a pieza -->
+<aside class="panel" id="panel" aria-label="Ficha del proyecto">
+  <div class="id build" data-at=".35"><a href="#inicio">MP Mallén</a><span class="mono grey">41°54′N 1°25′O</span></div>
+  <h2 class="claim build" data-at=".5">12 casas.<br>1 planta.<br>1 jardín.</h2>
   <div class="now">
-    <div class="counter"><b id="count">01 / 10</b><span class="ticks" id="ticks" aria-hidden="true"></span></div>
-    <div class="now-body" id="now" aria-live="polite"></div>
-    <dl class="sheet mono">
+    <div class="counter build" data-at=".65"><b id="count">01 / 09</b><span class="ticks" id="ticks" aria-hidden="true"></span></div>
+    <div class="now-body build" data-at=".7" id="now" aria-live="polite"></div>
+    <dl class="sheet mono build" data-at=".8">
       <div><dt>Superficie</dt><dd>108,30 m² const. · 91,60 m² útiles</dd></div>
       <div><dt>Jardín</dt><dd>54 m² privado</dd></div>
       <div><dt>Programa</dt><dd>3 dormitorios · 2 baños · garaje</dd></div>
       <div><dt>Lugar</dt><dd>Mallén, Zaragoza</dd></div>
       <div><dt>Precio</dt><dd>Desde 180.000 € + IVA</dd></div>
     </dl>
-    <nav class="links mono" aria-label="Láminas"><a href="#l05">Planta</a><a href="#l08">Construcción</a><a href="#l09">Mallén</a><a href="tel:+34682378623">682 378 623</a></nav>
-    <a class="cta" href="#l10"><span>Solicitar información</span><span>→</span></a>
+    <nav class="links mono build" data-at=".9" aria-label="Láminas"><a href="#l04">Planta</a><a href="#l07">Construcción</a><a href="#l08">Mallén</a><a href="tel:+34682378623">682 378 623</a></nav>
+    <a class="cta build" data-at=".97" href="#l09"><span>Solicitar información</span><span>→</span></a>
   </div>
 </aside>
 
-<!-- Barra superior en móvil -->
-<header class="bar"><a href="#l01">MP Mallén</a><span class="mono grey" id="count-m">01 / 10</span></header>
+<!-- Barra superior en móvil (se queda fija al pasar la portada) -->
+<div class="bar"><a href="#inicio">MP Mallén</a><span class="mono grey" id="count-m">01 / 09</span></div>
 
 <main>
   <section class="intro-m">
-    <h1>12 casas.<br>1 planta.<br>1 jardín.</h1>
+    <h2>12 casas.<br>1 planta.<br>1 jardín.</h2>
     <dl class="sheet mono">
       <div><dt>Superficie</dt><dd>108,30 m² const.</dd></div>
       <div><dt>Jardín</dt><dd>54 m² privado</dd></div>
@@ -204,46 +244,38 @@ form button:disabled{opacity:.5;cursor:wait}
       <div><dt>Lugar</dt><dd>Mallén, Zaragoza</dd></div>
       <div><dt>Precio</dt><dd>Desde 180.000 € + IVA</dd></div>
     </dl>
-    <a class="cta" href="#l10"><span>Solicitar información</span><span>→</span></a>
+    <a class="cta" href="#l09"><span>Solicitar información</span><span>→</span></a>
   </section>
 
-  <section class="plate bleed" id="l01">
-    <figure>
-      <img src="/Ext%202.jpg" srcset="/img/exterior-1200.jpg 1200w, /Ext%202.jpg 2400w" sizes="(max-width:900px) 100vw, 68vw" width="2400" height="1213" alt="Calle de acceso a las doce viviendas al atardecer" fetchpriority="high">
-      <figcaption class="mono"><span>01 — La calle</span><span>Render</span></figcaption>
-    </figure>
-    <div class="plate-text"><h2>La calle</h2><p>Doce casas de una sola planta a lo largo de una calle. Cada una se presenta a la calle con su acceso y su garaje.</p></div>
-  </section>
-
-  <section class="plate hang" id="l02">
+  <section class="plate hang" id="l01">
     <figure>
       <img src="/04.jpg" srcset="/img/04-1200.jpg 1200w, /04.jpg 2400w" sizes="(max-width:900px) 100vw, 56vw" width="2400" height="1350" alt="Fachada al jardín con terraza cubierta" loading="lazy" decoding="async">
-      <figcaption class="mono grey"><span>02 — El jardín</span><span>Render</span></figcaption>
+      <figcaption class="mono grey"><span>01 — El jardín</span><span>Render</span></figcaption>
     </figure>
-    <div class="plate-text"><h2>El jardín</h2><p>Por detrás, cada casa se abre a su jardín privado de 54 m² a través de una terraza cubierta.</p></div>
+    <div class="plate-text"><h3>Calle y jardín</h3><p>Doce casas de una sola planta a lo largo de una calle. Cada una tiene su acceso y su garaje a la calle y, por detrás, un jardín privado de 54 m².</p></div>
   </section>
 
-  <section class="plate offset" id="l03">
+  <section class="plate offset" id="l02">
     <figure>
       <img src="/02.jpg" srcset="/img/02-1200.jpg 1200w, /02.jpg 2400w" sizes="(max-width:900px) 100vw, 46vw" width="2400" height="1350" alt="Salón, comedor y cocina abiertos al jardín" loading="lazy" decoding="async">
-      <figcaption class="mono grey"><span>03 — La estancia</span><span>Render</span></figcaption>
+      <figcaption class="mono grey"><span>02 — La estancia</span><span>Render</span></figcaption>
     </figure>
-    <div class="plate-text"><h2>La estancia</h2><p>Salón, comedor y cocina forman un solo espacio de 22 m² que atraviesa la casa, de la entrada al jardín.</p></div>
+    <div class="plate-text"><h3>La estancia</h3><p>Salón, comedor y cocina forman un solo espacio de 22 m² que atraviesa la casa, de la entrada al jardín.</p></div>
   </section>
 
-  <section class="plate portrait" id="l04">
+  <section class="plate portrait" id="l03">
     <figure>
       <img src="/05.jpg" srcset="/img/05-1200.jpg 1200w, /05.jpg 2400w" sizes="(max-width:900px) 100vw, 40vw" width="2400" height="1350" alt="Dormitorio con salida al jardín" loading="lazy" decoding="async">
-      <figcaption class="mono grey"><span>04 — Dormitorio</span><span>Render</span></figcaption>
+      <figcaption class="mono grey"><span>03 — Dormitorio</span><span>Render</span></figcaption>
     </figure>
-    <div class="plate-text"><h2>Los dormitorios</h2><p>Tres dormitorios a ambos lados de la estancia. Dos comparten baño; el principal tiene el suyo.</p></div>
+    <div class="plate-text"><h3>Los dormitorios</h3><p>Tres dormitorios a ambos lados de la estancia. Dos comparten baño; el principal tiene el suyo.</p></div>
   </section>
 
-  <section class="plate" id="l05">
+  <section class="plate" id="l04">
     <div class="plan">
       <figure>
         <img src="/Planta.jpg" srcset="/img/planta-1200.jpg 1200w, /Planta.jpg 1940w" sizes="(max-width:900px) 100vw, 40vw" width="1940" height="1792" alt="Planta de la vivienda tipo: salón-cocina central, tres dormitorios, dos baños, terraza, porche y garaje" loading="lazy" decoding="async">
-        <figcaption class="mono grey"><span>05 — Planta, vivienda tipo</span></figcaption>
+        <figcaption class="mono grey"><span>04 — Planta, vivienda tipo</span></figcaption>
       </figure>
       <table class="areas mono">
         <caption>Superficies útiles</caption>
@@ -268,26 +300,26 @@ form button:disabled{opacity:.5;cursor:wait}
         </tfoot>
       </table>
     </div>
-    <div class="plate-text"><h2>La planta</h2><p>Todo en un único nivel, sin escaleras: 91,60 m² útiles y 108,30 m² construidos. Las doce casas comparten la misma planta.</p></div>
+    <div class="plate-text"><h3>La planta</h3><p>Todo en un único nivel, sin escaleras: 91,60 m² útiles y 108,30 m² construidos. Las doce casas comparten la misma planta.</p></div>
   </section>
 
-  <section class="plate bleed" id="l06">
+  <section class="plate bleed" id="l05">
     <figure>
-      <img src="/04B.jpg" srcset="/img/04B-1200.jpg 1200w, /04B.jpg 2400w" sizes="(max-width:900px) 100vw, 68vw" width="2400" height="1350" alt="Fachada al jardín de noche" loading="lazy" decoding="async">
-      <figcaption class="mono"><span>06 — De noche</span><span>Render</span></figcaption>
+      <img src="/04B.jpg" srcset="/img/04B-1200.jpg 1200w, /04B.jpg 2400w" sizes="(max-width:900px) 100vw, 70vw" width="2400" height="1350" alt="Fachada al jardín de noche" loading="lazy" decoding="async">
+      <figcaption class="mono"><span>05 — De noche</span><span>Render</span></figcaption>
     </figure>
-    <div class="plate-text"><h2>La terraza</h2><p>La terraza cubierta, de 6,30 m², es una habitación más entre la casa y el jardín.</p></div>
+    <div class="plate-text"><h3>La terraza</h3><p>La terraza cubierta, de 6,30 m², es una habitación más entre la casa y el jardín.</p></div>
   </section>
 
-  <section class="plate hang" id="l07">
+  <section class="plate hang" id="l06">
     <figure>
       <video controls playsinline preload="none" poster="/img/03-1200.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;background:#111"><source src="/2604VC_Video_compressed.mp4" type="video/mp4"></video>
-      <figcaption class="mono grey"><span>07 — Recorrido</span><span>Vídeo</span></figcaption>
+      <figcaption class="mono grey"><span>06 — Recorrido</span><span>Vídeo</span></figcaption>
     </figure>
-    <div class="plate-text"><h2>Recorrido</h2><p>Un paseo por la vivienda, de la calle al jardín.</p></div>
+    <div class="plate-text"><h3>Recorrido</h3><p>Un paseo por la vivienda, de la calle al jardín.</p></div>
   </section>
 
-  <section class="plate" id="l08">
+  <section class="plate" id="l07">
     <h2 class="plate-title">Construcción</h2>
     <dl class="spec">
       <div><dt>Cerramiento</dt><dd>Muros de hormigón armado, trasdosado de placa de yeso laminado y aislamiento de lana mineral.</dd></div>
@@ -302,14 +334,14 @@ form button:disabled{opacity:.5;cursor:wait}
       <div><dt>Cocina</dt><dd>No incluida en el precio.</dd></div>
     </dl>
     <p class="spec-note mono grey">Memoria orientativa. Las soluciones definitivas se concretarán en la documentación contractual y de proyecto.</p>
-    <div class="plate-text"><h2>Construcción</h2><p>Hormigón armado, aislamiento de lana mineral y XPS, carpintería de PVC. La cocina no está incluida en el precio.</p></div>
+    <div class="plate-text"><h3>Construcción</h3><p>Hormigón armado, aislamiento de lana mineral y XPS, carpintería de PVC. La cocina no está incluida en el precio.</p></div>
   </section>
 
-  <section class="plate" id="l09">
+  <section class="plate" id="l08">
     <div class="place">
       <figure class="wide">
         <img src="/Mallen_1.jpg" srcset="/img/mallen-1-1200.jpg 1200w, /Mallen_1.jpg 2400w" sizes="(max-width:900px) 100vw, 40vw" width="2400" height="1800" alt="Mallén" loading="lazy" decoding="async">
-        <figcaption class="mono grey"><span>09 — Mallén</span></figcaption>
+        <figcaption class="mono grey"><span>08 — Mallén</span></figcaption>
       </figure>
       <figure class="tall">
         <img src="/57414076_2825488057492544_5081431775616434176_n.jpg" width="1080" height="814" alt="Castildetierra, en las Bardenas Reales, bajo la Vía Láctea" loading="lazy" decoding="async">
@@ -321,10 +353,10 @@ form button:disabled{opacity:.5;cursor:wait}
       <div><dt>Bardenas Reales</dt><dd>≈ 35 km</dd></div>
       <div><dt>Zaragoza</dt><dd>57 km</dd></div>
     </dl>
-    <div class="plate-text"><h2>Mallén</h2><p>En la Ribera del Ebro, entre Zaragoza y Tudela, con la AP-68, la N-232 y el tren Castejón–Zaragoza. <a href="https://www.google.com/maps/dir/?api=1&amp;destination=41.903027,-1.422822" target="_blank" rel="noopener">Abrir en el mapa ↗</a></p></div>
+    <div class="plate-text"><h3>Mallén</h3><p>En la Ribera del Ebro, entre Zaragoza y Tudela, con la AP-68, la N-232 y el tren Castejón–Zaragoza. <a href="https://www.google.com/maps/dir/?api=1&amp;destination=41.903027,-1.422822" target="_blank" rel="noopener">Abrir en el mapa ↗</a></p></div>
   </section>
 
-  <section class="plate contact" id="l10">
+  <section class="plate contact" id="l09">
     <div class="contact-grid">
       <div>
         <h2>Información y visitas.</h2>
@@ -341,12 +373,35 @@ form button:disabled{opacity:.5;cursor:wait}
         <p class="status" id="c-status" role="status" hidden></p>
       </form>
     </div>
-    <div class="plate-text panel-only"><h2>Contacto</h2><p>Llámanos o escríbenos para pedir planos, disponibilidad y condiciones.</p></div>
+    <div class="plate-text panel-only"><h3>Contacto</h3><p>Llámanos o escríbenos para pedir planos, disponibilidad y condiciones.</p></div>
     <div class="foot mono"><span>MP Mallén · 12 viviendas en Mallén, Zaragoza</span><span>Imágenes: renders orientativos</span></div>
   </section>
 </main>
 
 <script>
+// El panel entra desde la izquierda a medida que se deja atrás la portada
+(function(){
+  var panel=document.getElementById('panel'),cover=document.getElementById('inicio');
+  var desktop=window.matchMedia('(min-width:901px)'),ticking=false,last=-1;
+  var parts=panel.querySelectorAll('.build');[].forEach.call(parts,function(el){el._at=parseFloat(el.dataset.at)||1});
+  function update(){
+    ticking=false;
+    if(!desktop.matches)return;
+    var h=cover.offsetHeight,y=window.scrollY;
+    // empieza a entrar a un 30 % de la portada y termina justo cuando la portada sale
+    var p=Math.min(1,Math.max(0,(y-h*0.3)/(h*0.7)));
+    if(p===last)return;last=p;
+    panel.style.setProperty('--p',p.toFixed(4));
+    panel.classList.toggle('in',p>=0.999);
+    for(var i=0;i<parts.length;i++)parts[i].classList.toggle('on',p>=parts[i]._at);
+    if(p<=0)panel.setAttribute('inert','');else panel.removeAttribute('inert');
+  }
+  function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(update)}}
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',function(){last=-1;onScroll()});
+  update();
+})();
+
 // El panel muestra el texto de la lámina que ocupa la pantalla
 (function(){
   var plates=[].slice.call(document.querySelectorAll('.plate'));
