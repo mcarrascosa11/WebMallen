@@ -89,7 +89,7 @@ a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.25em}
 
 /* ── Láminas ───────────────────────────────────────── */
 main{margin-left:var(--panel)}
-.plate{min-height:100vh;min-height:100svh;padding:6vh 5vw;display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid var(--rule);position:relative;scroll-margin-top:0}
+.plate{min-height:100vh;min-height:100svh;padding:5vh 4vw;display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid var(--rule);position:relative;scroll-margin-top:0}
 .plate figure{margin:0}
 .plate figcaption{display:flex;justify-content:space-between;gap:16px;margin-top:10px}
 .plate-text{display:none}
@@ -98,19 +98,12 @@ main{margin-left:var(--panel)}
 .no-js .plate-text p{margin:0}
 .panel-only{display:none!important}
 
-.bleed{padding:0}
-.bleed figure{height:100vh;height:100svh;position:relative}
-.bleed img{width:100%;height:100%;object-fit:cover}
-.bleed figcaption{position:absolute;left:20px;right:20px;bottom:16px;margin:0;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35)}
-.hang figure{width:min(100%,56vw);align-self:center}
-.hang img{width:100%}
-.portrait figure{align-self:center}
-.portrait img{height:min(78vh,78svh);width:auto;aspect-ratio:4/5;object-fit:cover;object-position:55% 50%}
-.offset figure{width:72%;align-self:flex-end}
-.offset img{width:100%}
+/* Todas las fotos con el mismo ancho, el mismo encuadre y los mismos márgenes */
+.shot figure{width:100%}
+.shot img,.shot video{display:block;width:100%;aspect-ratio:16/9;max-height:calc(100svh - 10vh - 36px);object-fit:cover;background:#f1f1ee}
 
-.plan{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(220px,.65fr);gap:5vw;align-items:center}
-.plan img{filter:grayscale(1) contrast(1.06) brightness(1.03);mix-blend-mode:multiply;max-height:84vh;width:auto;margin:auto}
+.plan{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(240px,.5fr);gap:4vw;align-items:center}
+.plan img{max-height:calc(100svh - 10vh - 36px);width:auto;max-width:100%}
 .areas{width:100%;border-collapse:collapse}
 .areas caption{text-align:left;padding-bottom:12px;color:var(--grey)}
 .areas th,.areas td{padding:5px 0;border-top:1px solid var(--rule);font-weight:400;text-align:left}
@@ -126,9 +119,9 @@ main{margin-left:var(--panel)}
 .spec-note{max-width:980px;width:100%;align-self:center;margin:24px 0 0}
 .plate-title{align-self:center;max-width:980px;width:100%;margin:0 0 40px;font-weight:400;font-size:clamp(28px,2.6vw,40px);letter-spacing:-.025em;line-height:1.05}
 
-.place{display:grid;grid-template-columns:1.25fr .75fr;gap:2vw;align-items:end;width:100%}
-.place .tall img{aspect-ratio:3/4;object-fit:cover;width:100%;max-height:62vh}
-.place .wide img{aspect-ratio:4/3;object-fit:cover;width:100%;max-height:62vh}
+.place{display:grid;grid-template-columns:1.5fr .5fr;gap:2vw;align-items:start;width:100%}
+.place .tall img{object-fit:cover;width:100%;height:60vh}
+.place .wide img{object-fit:cover;width:100%;height:60vh}
 .place img{filter:saturate(.8)}
 .dist{margin:36px 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:2vw;width:100%}
 .dist div{border-top:1px solid var(--ink);padding-top:10px}
@@ -173,13 +166,8 @@ form button:disabled{opacity:.5;cursor:wait}
   .plate-text{display:block;margin-top:20px}
   .plate-text h3{font-size:15px;font-weight:500;margin:0 0 6px}
   .plate-text p{margin:0;color:#3d3d3a}
-  .bleed{padding:0 0 48px}
-  .bleed figure{height:auto}
-  .bleed img{height:auto;aspect-ratio:4/5}
-  .bleed figcaption{position:static;color:var(--grey);text-shadow:none;margin:10px 16px 0}
-  .bleed .plate-text{margin:20px 16px 0}
-  .hang figure,.offset figure{width:100%}
-  .portrait img{height:auto;width:100%}
+  .shot img,.shot video{aspect-ratio:3/2;max-height:none}
+  .place .tall img,.place .wide img{height:auto;aspect-ratio:3/2}
   .plan img{max-height:none;width:100%}
   .plan,.place,.contact-grid,.spec,form{grid-template-columns:1fr}
   .spec div{grid-template-columns:1fr;gap:4px}
@@ -206,7 +194,7 @@ form button:disabled{opacity:.5;cursor:wait}
   <div class="cover-bottom">
     <div>
       <h1>12 casas en Mallén</h1>
-      <p class="sub mono">Una planta · jardín privado · garaje — desde 180.000 € + IVA</p>
+      <p class="sub mono">Viviendas adosadas de obra nueva · una planta · jardín privado · garaje — desde 180.000 € + IVA</p>
     </div>
     <a class="down mono" href="#l01">Ver el proyecto ↓</a>
   </div>
@@ -247,25 +235,25 @@ form button:disabled{opacity:.5;cursor:wait}
     <a class="cta" href="#l09"><span>Solicitar información</span><span>→</span></a>
   </section>
 
-  <section class="plate hang" id="l01">
+  <section class="plate shot" id="l01">
     <figure>
-      <img src="/04.jpg" srcset="/img/04-1200.jpg 1200w, /04.jpg 2400w" sizes="(max-width:900px) 100vw, 56vw" width="2400" height="1350" alt="Fachada al jardín con terraza cubierta" loading="lazy" decoding="async">
+      <img src="/04.jpg" srcset="/img/04-1200.jpg 1200w, /04.jpg 2400w" sizes="(max-width:900px) 100vw, 66vw" width="2400" height="1350" alt="Fachada al jardín con terraza cubierta" loading="lazy" decoding="async">
       <figcaption class="mono grey"><span>01 — El jardín</span><span>Render</span></figcaption>
     </figure>
     <div class="plate-text"><h3>Calle y jardín</h3><p>Doce casas de una sola planta a lo largo de una calle. Cada una tiene su acceso y su garaje a la calle y, por detrás, un jardín privado de 54 m².</p></div>
   </section>
 
-  <section class="plate offset" id="l02">
+  <section class="plate shot" id="l02">
     <figure>
-      <img src="/02.jpg" srcset="/img/02-1200.jpg 1200w, /02.jpg 2400w" sizes="(max-width:900px) 100vw, 46vw" width="2400" height="1350" alt="Salón, comedor y cocina abiertos al jardín" loading="lazy" decoding="async">
+      <img src="/02.jpg" srcset="/img/02-1200.jpg 1200w, /02.jpg 2400w" sizes="(max-width:900px) 100vw, 66vw" width="2400" height="1350" alt="Salón, comedor y cocina abiertos al jardín" loading="lazy" decoding="async">
       <figcaption class="mono grey"><span>02 — La estancia</span><span>Render</span></figcaption>
     </figure>
     <div class="plate-text"><h3>La estancia</h3><p>Salón, comedor y cocina forman un solo espacio de 22 m² que atraviesa la casa, de la entrada al jardín.</p></div>
   </section>
 
-  <section class="plate portrait" id="l03">
+  <section class="plate shot" id="l03">
     <figure>
-      <img src="/05.jpg" srcset="/img/05-1200.jpg 1200w, /05.jpg 2400w" sizes="(max-width:900px) 100vw, 40vw" width="2400" height="1350" alt="Dormitorio con salida al jardín" loading="lazy" decoding="async">
+      <img src="/05.jpg" srcset="/img/05-1200.jpg 1200w, /05.jpg 2400w" sizes="(max-width:900px) 100vw, 66vw" width="2400" height="1350" alt="Dormitorio con salida al jardín" loading="lazy" decoding="async">
       <figcaption class="mono grey"><span>03 — Dormitorio</span><span>Render</span></figcaption>
     </figure>
     <div class="plate-text"><h3>Los dormitorios</h3><p>Tres dormitorios a ambos lados de la estancia. Dos comparten baño; el principal tiene el suyo.</p></div>
@@ -274,7 +262,7 @@ form button:disabled{opacity:.5;cursor:wait}
   <section class="plate" id="l04">
     <div class="plan">
       <figure>
-        <img src="/Planta.jpg" srcset="/img/planta-1200.jpg 1200w, /Planta.jpg 1940w" sizes="(max-width:900px) 100vw, 40vw" width="1940" height="1792" alt="Planta de la vivienda tipo: salón-cocina central, tres dormitorios, dos baños, terraza, porche y garaje" loading="lazy" decoding="async">
+        <img src="/Planta.jpg" srcset="/img/planta-1200.jpg 1200w, /Planta.jpg 1940w" sizes="(max-width:900px) 100vw, 66vw" width="1940" height="1792" alt="Planta de la vivienda tipo: salón-cocina central, tres dormitorios, dos baños, terraza, porche y garaje" loading="lazy" decoding="async">
         <figcaption class="mono grey"><span>04 — Planta, vivienda tipo</span></figcaption>
       </figure>
       <table class="areas mono">
@@ -303,17 +291,17 @@ form button:disabled{opacity:.5;cursor:wait}
     <div class="plate-text"><h3>La planta</h3><p>Todo en un único nivel, sin escaleras: 91,60 m² útiles y 108,30 m² construidos. Las doce casas comparten la misma planta.</p></div>
   </section>
 
-  <section class="plate bleed" id="l05">
+  <section class="plate shot" id="l05">
     <figure>
-      <img src="/04B.jpg" srcset="/img/04B-1200.jpg 1200w, /04B.jpg 2400w" sizes="(max-width:900px) 100vw, 70vw" width="2400" height="1350" alt="Fachada al jardín de noche" loading="lazy" decoding="async">
-      <figcaption class="mono"><span>05 — De noche</span><span>Render</span></figcaption>
+      <img src="/04B.jpg" srcset="/img/04B-1200.jpg 1200w, /04B.jpg 2400w" sizes="(max-width:900px) 100vw, 66vw" width="2400" height="1350" alt="Fachada al jardín de noche" loading="lazy" decoding="async">
+      <figcaption class="mono grey"><span>05 — De noche</span><span>Render</span></figcaption>
     </figure>
     <div class="plate-text"><h3>La terraza</h3><p>La terraza cubierta, de 6,30 m², es una habitación más entre la casa y el jardín.</p></div>
   </section>
 
-  <section class="plate hang" id="l06">
+  <section class="plate shot" id="l06">
     <figure>
-      <video controls playsinline preload="none" poster="/img/03-1200.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;background:#111"><source src="/2604VC_Video_compressed.mp4" type="video/mp4"></video>
+      <video controls playsinline preload="none" poster="/img/03-1200.jpg"><source src="/2604VC_Video_compressed.mp4" type="video/mp4"></video>
       <figcaption class="mono grey"><span>06 — Recorrido</span><span>Vídeo</span></figcaption>
     </figure>
     <div class="plate-text"><h3>Recorrido</h3><p>Un paseo por la vivienda, de la calle al jardín.</p></div>
@@ -340,7 +328,7 @@ form button:disabled{opacity:.5;cursor:wait}
   <section class="plate" id="l08">
     <div class="place">
       <figure class="wide">
-        <img src="/Mallen_1.jpg" srcset="/img/mallen-1-1200.jpg 1200w, /Mallen_1.jpg 2400w" sizes="(max-width:900px) 100vw, 40vw" width="2400" height="1800" alt="Mallén" loading="lazy" decoding="async">
+        <img src="/Mallen_1.jpg" srcset="/img/mallen-1-1200.jpg 1200w, /Mallen_1.jpg 2400w" sizes="(max-width:900px) 100vw, 66vw" width="2400" height="1800" alt="Mallén" loading="lazy" decoding="async">
         <figcaption class="mono grey"><span>08 — Mallén</span></figcaption>
       </figure>
       <figure class="tall">
